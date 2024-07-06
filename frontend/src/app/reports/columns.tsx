@@ -5,8 +5,10 @@ import { Report } from "@/types";
 
 export const columns: ColumnDef<Report>[] = [
   {
-    accessorKey: "title",
-    header: "Title",
+    id: "select",
+    cell: ({ row }) => <p>{row.index + 1}.</p>,
+    enableSorting: false,
+    enableHiding: false,
   },
   {
     accessorKey: "result",

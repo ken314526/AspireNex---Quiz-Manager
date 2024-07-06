@@ -74,7 +74,7 @@ export default function Page() {
   }, [user._id, user.token, dispatch, router]);
 
   return (
-    <div className="flex items-start justify-center min-h-screen py-24">
+    <div className="flex items-start justify-center min-h-screen p-2 py-24">
       <div className="w-full max-w-4xl">
         {reports ? (
           <>

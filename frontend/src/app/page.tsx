@@ -12,10 +12,12 @@ export default function Home() {
   const user = useAppSelector((state) => state.user);
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getUserInfo(token: string) {
       try {
+        setLoading(true);
         const response = await axios({
           method: "get",
           url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/profile`,
@@ -24,6 +26,7 @@ export default function Home() {
             Authorization: `Bearer ${token}`,
           },
         });
+        setLoading(false);
 
         if (response?.data?.success) {
           toast.success(response?.data?.message);
@@ -47,18 +50,25 @@ export default function Home() {
 
   return (
     <div className="flex items-center justify-center min-h-screen py-24">
-      <div className="grid grid-cols-1 gap-6">
-        <Link href="/quizzes">
-          <span className="block bg-blue-500 text-white text-center p-6 rounded-lg shadow-md hover:bg-blue-600 transition">
-            <h2 className="text-2xl font-bold">Quizzes</h2>
-          </span>
-        </Link>
-        <Link href="/reports">
-          <span className="block bg-green-500 text-white text-center p-6 rounded-lg shadow-md hover:bg-green-600 transition">
-            <h2 className="text-2xl font-bold">Reports</h2>
-          </span>
-        </Link>
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="grid grid-cols-1 gap-6">
+          <h1 className="text-3xl text-center font-semibold mb-4">
+            Welcome {user.name} !
+          </h1>
+          <Link href="/quizzes">
+            <span className="block bg-blue-500 text-white text-center p-6 rounded-lg shadow-md hover:bg-blue-600 transition">
+              <h2 className="text-2xl font-bold">Quizzes</h2>
+            </span>
+          </Link>
+          <Link href="/reports">
+            <span className="block bg-green-500 text-white text-center p-6 rounded-lg shadow-md hover:bg-green-600 transition">
+              <h2 className="text-2xl font-bold">Reports</h2>
+            </span>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
