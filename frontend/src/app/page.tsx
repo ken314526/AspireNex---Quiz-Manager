@@ -12,9 +12,6 @@ export default function Home() {
   const user = useAppSelector((state) => state.user);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   useEffect(() => {
     async function getUserInfo(token: string) {

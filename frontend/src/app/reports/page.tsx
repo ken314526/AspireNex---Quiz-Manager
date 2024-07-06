@@ -16,7 +16,6 @@ export default function Page() {
   const [reports, setReports] = useState<Report[] | null>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  console.log(user);
 
   useEffect(() => {
     async function getUserInfo(token: string) {

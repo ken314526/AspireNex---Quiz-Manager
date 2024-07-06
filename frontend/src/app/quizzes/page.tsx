@@ -16,7 +16,6 @@ export default function Page() {
   const [quizzes, setQuizzes] = useState<Quiz[] | null>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  console.log(user);
 
   useEffect(() => {
     async function getUserInfo(token: string) {
